@@ -1,8 +1,10 @@
-module.exports =(err,req,res,next)=>{
-res.status(500).json({
-    bodyIs:req.body.password === undefined ? 'no password' : req.body.password,
-    path:req.path,
-    message:err.message || err,
-    status:500
-    })
-}
+'use strict'
+
+module.exports = function (err, req, res, next) {
+    const error = err.message ? err.message : err;
+    const errorObject = {
+      status: 500,
+      message: error
+    };
+    res.status(500).json(errorObject);
+  };
